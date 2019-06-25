@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import logo from "./logo.png";
+import logo from "../../media/logo.png";
 import { Form, Icon, Input, Button} from 'antd';
 import Ajax from "../../api/login";
+import { setItem } from '../../utils/storage-tools';
 class Login extends Component {
     validator = (rule, value, callback) =>{
         const name = rule.fullField === "username"?"用户名":"密码";
@@ -21,10 +22,10 @@ class Login extends Component {
     login = (e)=> {
         e.preventDefault();
         this.props.form.validateFields(async (error,values) => {
-            if(!error){
-                const {username,password} = values;
-                await Ajax("/login",{username,password},"post");
-                console.log(111);
+            const {username,password} = values;
+            const result = await Ajax("/login",{username,password},"post");
+            if(result){
+                setItem(result);
                 this.props.history.push('./');
             }else{
                 alert("用户名密码错误")

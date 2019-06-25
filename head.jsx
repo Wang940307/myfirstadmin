@@ -94,7 +94,7 @@ class HeaderMain extends Component {
     return <div>
       <div className="header-main-top">
         <span>欢迎, {this.username}</span>
-        <MyButton onClick={this.logout}>退出</MyButton>
+        <MyButton >退出</MyButton>
       </div>
       <div className="header-main-bottom">
         <span className="header-main-left">{this.title}</span>

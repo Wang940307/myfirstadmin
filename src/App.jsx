@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Login from "./pages/login/index";
-import Register from "./pages/register/index";
 import Index from "./pages/indexpage/index";
 import {Switch,Route,Redirect} from "react-router-dom";
 
