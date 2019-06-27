@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { getItem, removeItem } from '../../utils/storage-tools';
 import dayjs from 'dayjs';
 import { reqWeather } from '../../api';
+import menuList from '../../config/menu-config';
 import './index.less';
 const { confirm } = Modal;
 class HeaderMain extends Component {
@@ -16,7 +17,7 @@ class HeaderMain extends Component {
   componentWillMount() {
     // 只要读取一次
     this.username = getItem().username;
-    // this.title = this.getTitle(this.props);
+    this.title = this.getTitle(this.props);
   }
   async componentDidMount() {
     setInterval(() => {
@@ -29,7 +30,30 @@ class HeaderMain extends Component {
       this.setState(result);
     }
   }
+componentWillReceiveProps(nextProps, nextContext) {
+  this.title = this.getTitle(nextProps);
+}
 
+  getTitle = (nextProps) => {
+    const path = nextProps.location.pathname;
+    for (let i = 0; i < menuList.length; i++) {
+      const menu = menuList[i];
+      if (menu.children) {
+
+        for (let j = 0; j < menu.children.length; j++) {
+          const item = menu.children[j];
+          if (item.key === path) {
+            return item.title;
+          }
+        }
+
+      } else {
+        if (menu.key === path) {
+          return menu.title;
+        }
+      }
+    }
+  };
   exit = ()=> {
     confirm({
       title: '您确认要退出登录吗?',
@@ -49,7 +73,7 @@ class HeaderMain extends Component {
         <MyButton onClick ={this.exit}>退出</MyButton>
       </div>
       <div className="header-main-bottom">
-        <span className="header-main-left">用户管理</span>
+        <span className="header-main-left">{this.title}</span>
         <div className="header-main-right">
           <span>{dayjs(sysTime).format('YYYY-MM-DD HH:mm:ss')}</span>
           <img src={weatherImg} alt=""/>

@@ -20,7 +20,6 @@ class LeftNav extends Component {
   };
   componentWillMount() {
     const { pathname } = this.props.location;
-    console.log(pathname);
     // 根据menuList生成菜单
     this.menus = menuList.map((menu) => {
       // 判断是一级菜单还是二级菜单
@@ -68,58 +67,6 @@ class LeftNav extends Component {
         {
           this.menus
         }
-        {/*<Item key="1">*/}
-          {/*<Icon type="home" />*/}
-          {/*<span>首页</span>*/}
-        {/*</Item>*/}
-        {/*<SubMenu*/}
-          {/*key="sub1"*/}
-          {/*title={*/}
-            {/*<span>*/}
-              {/*<Icon type="appstore" />*/}
-              {/*<span>商品</span>*/}
-            {/*</span>*/}
-          {/*}*/}
-        {/*>*/}
-          {/*<Item key="3">*/}
-            {/*<Icon type="bars" />*/}
-            {/*<span>品类管理</span>*/}
-          {/*</Item>*/}
-          {/*<Item key="4">*/}
-            {/*<Icon type="tool" />*/}
-            {/*<span>商品管理</span>*/}
-          {/*</Item>*/}
-        {/*</SubMenu>*/}
-        {/*<Item key="5">*/}
-          {/*<Icon type="user" />*/}
-          {/*<span>用户管理</span>*/}
-        {/*</Item>*/}
-        {/*<Item key="6">*/}
-          {/*<Icon type="user" />*/}
-          {/*<span>权限管理</span>*/}
-        {/*</Item>*/}
-        {/*<SubMenu*/}
-          {/*key="sub2"*/}
-          {/*title={*/}
-            {/*<span>*/}
-                {/*<Icon type="team" />*/}
-                {/*<span>图形图表</span>*/}
-              {/*</span>*/}
-          {/*}*/}
-        {/*>*/}
-          {/*<Item key="7">*/}
-            {/*<Icon type="team" />*/}
-            {/*<span>柱形图</span>*/}
-          {/*</Item>*/}
-          {/*<Item key="8">*/}
-            {/*<Icon type="team" />*/}
-            {/*<span>折线图</span>*/}
-          {/*</Item>*/}
-          {/*<Item key="9">*/}
-            {/*<Icon type="team" />*/}
-            {/*<span>饼图</span>*/}
-          {/*</Item>*/}
-        {/*</SubMenu>*/}
       </Menu>
     </div>;
   }
