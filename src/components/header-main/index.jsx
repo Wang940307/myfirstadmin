@@ -35,7 +35,12 @@ componentWillReceiveProps(nextProps, nextContext) {
 }
 
   getTitle = (nextProps) => {
-    const path = nextProps.location.pathname;
+    const pathnameReg = /^\/product\//;
+
+    let path = nextProps.location.pathname;
+    if (pathnameReg.test(path)) {
+      path = path.slice(0, 8);
+    }
     for (let i = 0; i < menuList.length; i++) {
       const menu = menuList[i];
       if (menu.children) {

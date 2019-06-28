@@ -10,8 +10,14 @@ const { Option } = Select;
 export default class Index extends Component {
   state = {
     products: [],
-    total: 0
+    total: 0,
+    loading: true
   };
+
+  componentDidMount() {
+    this.getProducts(1, 3);
+  };
+
   getProducts = async (pageNum, pageSize) => {
     this.setState({
       loading: true
@@ -24,9 +30,6 @@ export default class Index extends Component {
         loading: false
       })
     }
-  };
-  async componentDidMount() {
-    this.getProducts(1, 3);
   };
 
   showAddProduct = () => {
@@ -41,7 +44,7 @@ export default class Index extends Component {
 
   render() {
 
-    const { products,total } = this.state;
+    const { products, total, loading } = this.state;
 
     const columns = [
       {
@@ -81,8 +84,8 @@ export default class Index extends Component {
     return <Card
       title={
         <div>
-          <Select defaultValue={1}>
-            <Option key= {0} value={0}>根据商品名称</Option>
+          <Select defaultValue={0}>
+            <Option key={0} value={0}>根据商品名称</Option>
             <Option key={1} value={1}>根据商品描述</Option>
           </Select>
           <Input placeholder="关键字" className="search-input"/>
@@ -102,8 +105,10 @@ export default class Index extends Component {
           defaultPageSize: 3,
           total,
           onChange: this.getProducts,
+          onShowSizeChange: this.getProducts
         }}
-        rowKey= "_id"
+        rowKey="_id"
+        loading={loading}
       />
     </Card>;
   }

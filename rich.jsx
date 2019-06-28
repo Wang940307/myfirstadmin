@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import {EditorState, convertToRaw, ContentState} from 'draft-js';
+import PropTypes from 'prop-types';
+import { EditorState, ContentState  } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
-import draftToHtml from 'draftjs-to-html';
+// import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
+
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import PropTypes from "prop-types";
 
 export default class RichTextEditor extends Component {
-  state = {
-    editorState: EditorState.createEmpty(),
-  };
   static propTypes = {
     detail: PropTypes.string.isRequired
   };
+
   constructor(props) {
     super(props); // 不传就不能再constructor使用props。传了就可以使用
 
@@ -25,7 +24,11 @@ export default class RichTextEditor extends Component {
       editorState
     };
   }
+
+
+
   onEditorStateChange = (editorState) => {
+    // console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
     this.setState({
       editorState,
     });
@@ -34,13 +37,14 @@ export default class RichTextEditor extends Component {
   render() {
     const { editorState } = this.state;
     return (
-        <div>
-          <Editor
-              editorState={editorState}
-              editorClassName="editor"
-              onEditorStateChange={this.onEditorStateChange}
-          />
-        </div>
+      <div>
+        <Editor
+          editorState={editorState}
+          // wrapperClassName="editor-wrapper"
+          editorClassName="editor"
+          onEditorStateChange={this.onEditorStateChange}
+        />
+      </div>
     );
   }
 }
